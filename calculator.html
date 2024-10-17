@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journey to Nature Park</title>
+    <link rel="stylesheet" href="calculator.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">CArBON</div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Average use</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+            <a href="calculator.html" class="button">CALCULATE
+                CARBON USE
+            </a>
+        </nav>
+    </header>
+    <section class="coal">
+    <section class="calculator">
+        <h2>Carbon Footprint Calculator</h2>
+        <form id="carbonForm">
+            <label for="electricity">Electricity usage (kWh per month):</label>
+            <input type="number" id="electricity" name="electricity" required>
+    
+            <label for="fuel">Fuel consumption (liters per month):</label>
+            <input type="number" id="fuel" name="fuel" required>
+    
+            <label for="waste">Waste produced (kg per month):</label>
+            <input type="number" id="waste" name="waste" required>
+    
+            <label for="transport">Distance traveled by car (km per month):</label>
+            <input type="number" id="transport" name="transport" required>
+    
+            <button type="submit">Calculate Footprint</button>
+        </form>
+    
+        <div id="result" class="result"></div>
+    </section></section>
+    <script>
+        document.getElementById('carbonForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+    
+            // Get form values
+            const electricity = parseFloat(document.getElementById('electricity').value);
+            const fuel = parseFloat(document.getElementById('fuel').value);
+            const waste = parseFloat(document.getElementById('waste').value);
+            const transport = parseFloat(document.getElementById('transport').value);
+    
+            // Constants for emissions in kg CO2 per unit
+            const ELECTRICITY_EMISSION_FACTOR = 0.233;  // kg CO2 per kWh
+            const FUEL_EMISSION_FACTOR = 2.31;          // kg CO2 per liter of gasoline
+            const WASTE_EMISSION_FACTOR = 0.002;        // kg CO2 per kg of waste
+            const TRANSPORT_EMISSION_FACTOR = 0.12;     // kg CO2 per km for car travel
+    
+            // Calculate the carbon footprint
+            const electricityFootprint = electricity * ELECTRICITY_EMISSION_FACTOR;
+            const fuelFootprint = fuel * FUEL_EMISSION_FACTOR;
+            const wasteFootprint = waste * WASTE_EMISSION_FACTOR;
+            const transportFootprint = transport * TRANSPORT_EMISSION_FACTOR;
+    
+            const totalFootprint = electricityFootprint + fuelFootprint + wasteFootprint + transportFootprint;
+    
+            // Display the result
+            document.getElementById('result').innerHTML = `
+                <p>Your estimated carbon footprint is: <strong>${totalFootprint.toFixed(2)} kg CO<sub>2</sub> per month</strong></p>
+            `;
+        });
+    </script>
+    
+    
+
+    <footer>
+        <p>&copy; 2024 Nottosan. All rights reserved.</p>
+    </footer>
+</body>
+</html>
